@@ -40,6 +40,13 @@ kotlin {
         compileOnly(compose.foundation)
         implementation("org.kodein.di:kodein-di:$kodeinDIVersion")
     }
+// TODO if integrated to Kodein-DI main repo
+//    sourceSets["androidMain"].dependencies {
+//        api("org.kodein.di:kodein-di-framework-android-x:$kodeinDIVersion")
+//    }
+//    sourceSets["jvmMain"].dependencies {
+//        api("org.kodein.di:kodein-di:$kodeinDIVersion")
+//    }
 }
 
 
