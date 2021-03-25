@@ -77,6 +77,16 @@ val javadocJar = tasks.create<Jar>("javadocJar") {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "Snapshot"
+            setUrl { "https://oss.sonatype.org/content/repositories/snapshots/" }
+            credentials {
+                username = System.getenv("SONATYPE_USERNAME")
+                password = System.getenv("SONATYPE_PASSWORD")
+            }
+        }
+    }
     publications.withType<MavenPublication>().configureEach {
         version = project.version.toString()
         artifact(javadocJar)
