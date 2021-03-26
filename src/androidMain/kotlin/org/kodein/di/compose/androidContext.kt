@@ -7,6 +7,11 @@ import androidx.compose.ui.platform.LocalContext
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 
+/**
+ * Access the closest [DI] container attached to the [Context]
+ *
+ * @throws [ClassCastException] if no [DI] container is declared in the parent [Context]s
+ */
 @Composable
 public fun contextDI(): DI {
     var context: Context? = LocalContext.current
@@ -17,5 +22,10 @@ public fun contextDI(): DI {
     return (LocalContext.current.applicationContext as DIAware).di
 }
 
+/**
+ * Attaches a [DI] container to the underlying [Composable] tree, using the [DI] container attached to the current [Context] (see [contextDI]).
+ *
+ * @param content underlying [Composable] tree that will be able to consume the [LocalDI] container
+ */
 @Composable
 public fun withDI(content: @Composable () -> Unit) = CompositionLocalProvider(LocalDI provides contextDI()) { content() }
